@@ -14,8 +14,58 @@ if (rssReports == null) {
     rssReports = {};
 }
 
+/*
+ * Localization
+ */
+const locales = {
+    'en_dk': {
+        'player': 'Player',
+        'wood': 'Wood',
+        'stone': 'Clay',
+        'iron': 'Iron',
+        'sum': 'Sum',
+        't_sum': 'Sum of table: ',
+        'mem_clear': 'Memory is clear',
+        'c_cache_1': 'There are ',
+        'c_cache_2': ' reports in memory taking ',
+        'c_cache_3': ' KB of memory. It is recommended to clear cache when there is over 5000 reports.',
+        'b_clear': 'Clear cache',
+        'b_export': 'Export to BB',
+        'b_load': 'Load from table',
+        'b_start': 'Run statistic',
+        'insert_table': 'Insert table(s)'
+    }, 'cs_CZ': {
+        'player': 'Hráč',
+        'wood': 'Dřevo',
+        'stone': 'Hlína',
+        'iron': 'Železo',
+        'sum': 'Celkem',
+        't_sum': 'Součet surovin z tabulky: ',
+        'mem_clear': 'Paměť je čistá',
+        'c_cache_1': 'V paměti se nachází ',
+        'c_cache_2': ' oznámení zabírající ',
+        'c_cache_3': ' KB paměti. Je doporučeno vyčistit paměť při více jak 5000 oznámení.',
+        'b_clear': 'Vyčistit paměť',
+        'b_export': 'Vygenerovat BB',
+        'b_load': 'Načíst z tabulky',
+        'b_start': 'Spustit statistiku',
+        'insert_table': 'Vložte tabulku(y) v BB kódech'
+    }
+};
+
+let strings;
+
+let locale = window['game_data']['locale'];
+if (locales.hasOwnProperty(locale)) {
+    strings = locales[locale];
+} else {
+    strings = Object.values(locales)[0];
+}
+
 
 addTable();
+
+
 
 /**
  * Functions
@@ -30,12 +80,12 @@ function clearCache() {
     if (localStorage[local_storage_key]) {
         let size = (((localStorage[local_storage_key].length + 'rss_length'.length) * 2) / 1024).toFixed(2);
         let amount = Object.keys(JSON.parse(localStorage.getItem(local_storage_key))).length;
-        let r = confirm('V paměti se nachází ' + amount + ' oznámení zabírající ' + size + ' KB paměti. Doporučuji vyčistit paměť při více jak 5.000 oznámení');
+        let r = confirm(strings.c_cache_1 + amount + strings.c_cache_2 + size + strings.c_cache_3);
         if (r === true) {
             localStorage.removeItem(local_storage_key);
         }
     } else {
-        alert('Paměť je čistá');
+        alert(strings.mem_clear);
     }
 
 }
@@ -43,7 +93,7 @@ function clearCache() {
 function exportToBB() {
     document.getElementById('bb_output').innerHTML = `<textarea id="rss_bb_text" readonly style="width: 100%" rows="10"></textarea>`;
     let ta = document.getElementById('rss_bb_text');
-    ta.textContent = "[table]\n[**]Hráč[||]Dřevo[||]Hlína[||]Železo[||]Celkem[/**]\n";
+    ta.textContent = `[table]\n[**]${strings.player}[||]${strings.wood}[||]${strings.stone}[||]${strings.iron}[||]${strings.sum}[/**]\n`;
     $('#donation_table > tbody  > tr').each(function (index, tr) {
         let cells = tr.getElementsByTagName('td');
         ta.value += "[*]" + cells[0].textContent + '[|]' + cells[1].textContent + '[|]' + cells[2].textContent + '[|]' + cells[3].textContent + '[|]' + cells[4].textContent + "\n";
@@ -53,7 +103,7 @@ function exportToBB() {
     for (let a in sum) {
         s += sum[a];
     }
-    ta.value += 'Surovin celkem: ' + s;
+    ta.value += `${strings.t_sum}` + s;
 }
 
 function addTable() {
@@ -65,21 +115,21 @@ function addTable() {
         <table style="width:100%" class="vis" id="donation_table">
             <thead>
                 <tr>
-                    <th style="cursor: pointer">Hráč</th>
-                    <th style="cursor: pointer">Dřevo</th>
-                    <th style="cursor: pointer">Hlína</th>
-                    <th style="cursor: pointer">Železo</th>
-                    <th style="cursor: pointer">Celkem</th>
+                    <th style="cursor: pointer">${strings.player}</th>
+                    <th style="cursor: pointer">${strings.wood}</th>
+                    <th style="cursor: pointer">${strings.stone}</th>
+                    <th style="cursor: pointer">${strings.iron}</th>
+                    <th style="cursor: pointer">${strings.sum}</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
      
-        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="clearCache()">Vyčistit paměť</button>
-        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="exportToBB()">Vygenerovat BB</button>
-        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="insertTable()">Načíst z tabulky</button>
-        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="runStatistics()">Spustit statistiku</button>
+        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="clearCache()">${strings.b_clear}</button>
+        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="exportToBB()">${strings.b_export}</button>
+        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="insertTable()">${strings.b_load}</button>
+        <button class="btn float_right" style="margin-top: 10px; margin-bottom: 10px;" onClick="runStatistics()">${strings.b_start}</button>
         <br><br>
         <div id="bb_output"></div>
     
@@ -121,7 +171,7 @@ function clearTable() {
 
 
 function insertTable() {
-    const table = prompt("Vložte tabulku v BB kódech", "[table][/table]");
+    const table = prompt(strings.insert_table, "[table][/table]");
     let lines = table.split('\n');
     for (let line in lines) {
         if (lines[line].startsWith('[*]')) {
