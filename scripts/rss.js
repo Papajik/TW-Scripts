@@ -31,9 +31,11 @@ const locales = {
         'c_cache_3': ' KB of memory. It is recommended to clear cache when there is over 5000 reports.',
         'b_clear': 'Clear cache',
         'b_export': 'Export to BB',
-        'b_load': 'Load from table',
+        'b_load': 'Load from the table',
         'b_start': 'Run statistic',
-        'insert_table': 'Insert table(s)'
+        'insert_table': 'Insert table(s)',
+        'processed':'Processed',
+        'contributions':'Contributions'
     }, 'cs_CZ': {
         'player': 'Hráč',
         'wood': 'Dřevo',
@@ -49,7 +51,9 @@ const locales = {
         'b_export': 'Vygenerovat BB',
         'b_load': 'Načíst z tabulky',
         'b_start': 'Spustit statistiku',
-        'insert_table': 'Vložte tabulku(y) v BB kódech'
+        'insert_table': 'Vložte tabulku(y) v BB kódech',
+        'processed':'Zpracováno',
+        'contributions':'Příspěvky'
     }
 };
 
@@ -62,10 +66,7 @@ if (locales.hasOwnProperty(locale)) {
     strings = Object.values(locales)[0];
 }
 
-
 addTable();
-
-
 
 /**
  * Functions
@@ -74,7 +75,6 @@ function incrementDonationCount() {
     let donationCount = Number(document.querySelector("#donation_count").textContent);
     document.querySelector("#donation_count").textContent = (donationCount + 1).toString();
 }
-
 
 function clearCache() {
     if (localStorage[local_storage_key]) {
@@ -108,10 +108,9 @@ function exportToBB() {
 
 function addTable() {
     let table = ` 
-     
         <br>
-        <p><b>Příspěvky</b></p>
-        <div >Zpracováno: <span id="donation_count">0</span>/<span>${reports.length}</span></div>
+        <p><b>${strings.contributions}</b></p>
+        <div >${strings.processed}: <span id="donation_count">0</span>/<span>${reports.length}</span></div>
         <table style="width:100%" class="vis" id="donation_table">
             <thead>
                 <tr>
@@ -159,7 +158,6 @@ function addTable() {
     });
 }
 
-
 function clearTable() {
     $("#donation_table tbody tr").remove();
     document.querySelector("#donation_count").textContent = "0";
@@ -168,7 +166,6 @@ function clearTable() {
     stone = {};
     wood = {};
 }
-
 
 function insertTable() {
     const table = prompt(strings.insert_table, "[table][/table]");
@@ -184,7 +181,6 @@ function insertTable() {
         }
     }
 }
-
 
 function checkPlayer(player) {
     if (!players.includes(player)) {
@@ -242,7 +238,6 @@ function updateSum(player) {
     sum[player] = wood[player] + stone[player] + iron[player];
     d.textContent = sum[player];
 }
-
 
 function runStatistics() {
     clearTable();
