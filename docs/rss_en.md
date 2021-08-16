@@ -37,3 +37,6 @@ Exports table be used in tribe forum or to sum two or more tables together.
 
 ##### Clear cache
 Clears local memory. It is recommended to clear cache when there is more than 5,000 reports saved.
+
+##### Sorting the table
+It is possible to sort the table by clicking on the header of the table. 

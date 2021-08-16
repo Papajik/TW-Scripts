@@ -24,7 +24,7 @@ Velmi lehce se může stát, že při dvoudenní ražbě a vysokém počtu ozná
 #### Skript
 ![Skript](../media/images/rss_cs_2.png)
 
-Skript lze ovládat pomocí následujících tlačítek
+Skript lze ovládat pomocí následujících tlačítek:
 
 ##### Spustit statistiku
 
@@ -46,4 +46,5 @@ Aby nedocházelo k přeplnění paměti, umožňuje tento skript smazat vešker�
 Po stisku tlačítka je uživatel seznámen uvidí uživatel počet již uložených oznámení a využití paměti. 
 Je doporučeno smazat data při více jak 5.000 oznámení jinak může dojít k problémům při běhu tohoto i některých jiných skriptů.   
 
-
+##### Řazení tabulky
+Tabulku je možné seřadit pomocí kliku na zápatí tabulky.
