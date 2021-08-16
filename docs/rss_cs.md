@@ -33,7 +33,7 @@ Aby nedošlo k zahlcení serveru příliš mnoha dotazy, je mezi každým dotaze
 Každé oznámení se zároveň ukládá do paměti prohlížeče, aby byl každý další běh skriptu rychlejší.
 Při novém spuštění skriptu jsou nejprve zkontrolována uložená oznámení. 
 
-#####Načíst z tabulky
+##### Načíst z tabulky
 Uživatel může vzít více tabulek a vložit jej pomocí tohoto tlačítka. Vkládá se dříve vygenerovaná tabulka v BB kódu, případně je možné vložit několik tabulek naráz. Každá vložená tabulka je pak přičtena do tabulky surovin. Toto je vhodné zejména pokud má uživatel příliš mnoho oznámení, jejichž počet se nevejde na jednu stránku, aby nemusel ručně sčítat počty ve více tabulkách.
 
 ##### Vygenerovat BB
