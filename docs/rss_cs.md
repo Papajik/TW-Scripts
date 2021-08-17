@@ -1,4 +1,4 @@
-#Statistika dodaných surovin
+# Statistika dodaných surovin
 
 _Jiné jazykové verze:_ [English](rss_en.md), [čeština](rss_cs.md)
 

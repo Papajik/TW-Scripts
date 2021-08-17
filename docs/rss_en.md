@@ -1,4 +1,4 @@
-#Resources Sent Statistics
+# Resources Sent Statistics
 
 _Read this in other languages:_ [English](rss_en.md), [čeština](rss_cs.md)
 
@@ -20,7 +20,7 @@ _It is recommended to move all required reports into custom folder to prevent de
 ![Filtrování](../media/images/rss_cs_1.png)
 * Set __Reports per page__ to 1000
 
-#### Skript
+#### Script
 ![Skript](../media/images/rss_en_2.png)
 
 There are following buttons to control the script
@@ -30,7 +30,9 @@ Starts reports gathering. There is 200 ms delay between each request.
 Every requested report is also saved to local cache to prevent overloading the server with too many requests.  
 
 ##### Load from the table
-Uživatel může vzít více tabulek a vložit jej pomocí tohoto tlačítka. Vkládá se dříve vygenerovaná tabulka v BB kódu, případně je možné vložit několik tabulek naráz. Každá vložená tabulka je pak přičtena do tabulky surovin. Toto je vhodné zejména pokud má uživatel příliš mnoho oznámení, jejichž počet se nevejde na jednu stránku, aby nemusel ručně sčítat počty ve více tabulkách.
+Insert previously exported table(s). 
+It is possible to insert multiple tables at once. 
+This function is useful if there is too much reports that can't fit into one page (1000+ reports)
 
 ##### Export to BB
 Exports table be used in tribe forum or to sum two or more tables together.
