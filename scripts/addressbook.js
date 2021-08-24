@@ -1,6 +1,7 @@
 /*
 Relocation
  */
+
 if (window.location.href.indexOf('screen=mail&mode=address') < 0) {
     window.location.assign(window['game_data']['link_base_pure'] + "mail&mode=address");
 }
@@ -9,7 +10,6 @@ if (window.location.href.indexOf('screen=mail&mode=address') < 0) {
  Localization
  */
 
-// const locales = ['en_dk', 'cs_CZ'];
 const locales = {
     'en_dk': {
         'group_name': 'Group name',
