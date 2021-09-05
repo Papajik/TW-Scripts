@@ -10,3 +10,9 @@ _Jiné jazykové verze:_ [English](README.md), [čeština](README.cs.md)
 ```
 javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/rss.js');
 ```
+
+#### [Import kontaktů](docs/addressbook_cs.md)
+
+```
+javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/addressbook.js');
+```

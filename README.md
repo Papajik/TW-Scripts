@@ -10,3 +10,9 @@ _Read this in other languages:_ [English](README.md), [čeština](README.cs.md)
 ```
 javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/rss.js');
 ```
+
+#### [Address book import](docs/addressbook_en.md)
+
+```
+javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/addressbook.js');
+```

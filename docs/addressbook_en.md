@@ -1,5 +1,4 @@
-# Resources Sent Statistics
-
+# Address book import
 _Read this in other languages:_ [English](rss_en.md), [čeština](rss_cs.md)
 
 This script is used to import contacts into address book. 
