@@ -14,7 +14,7 @@ const locales = {
     'en_dk': {
         'group_name': 'Group name',
         'group_members': 'Group members',
-        'import_contacts': 'Import contacts',
+        'import': 'Import',
         'fill_group': 'Fill group',
         'empty_alert': 'Group name or group members is empty.',
         'no_contacts': 'Contacts missing!',
@@ -25,7 +25,7 @@ const locales = {
     'cs_CZ': {
         'group_name': 'Jméno skupiny',
         'group_members': 'Členové',
-        'import_contacts': 'Importovat kontakty',
+        'import': 'Importovat',
         'fill_group': 'Vyplnit skupinu',
         'empty_alert': 'Nevyplnil jste název nebo členy skupiny.',
         'no_contacts': 'Kontakty nejsou vyplněny!',
@@ -76,15 +76,32 @@ function createTable() {
             </tr>
         </tbody>
     </table>
-    <button class="btn" style="margin-top: 10px; margin-bottom: 10px;" onClick="importContacts()">${strings.import_contacts}</button>
-    <button class="btn" style="margin-top: 10px; margin-bottom: 10px;" onClick="createAndFillGroup()">${strings.fill_group}</button>
+    <button class="btn" style="margin-top: 10px; margin-bottom: 10px;" onClick="importAll()">${strings.import}</button>
     `;
     $(f).insertBefore(document.querySelector("table > tbody > tr > td > h3"));
 }
 
+async function importAll() {
+    await importContacts();
+    let groupName = document.getElementById('address_name').value;
+    if (groupName === '') {
+        return;
+    }
+    let ids = getPlayerIds();
+    await createGroup(groupName);
+    let groupId = getGroupId();
+
+    if (ids && groupId) {
+        await fillGroup(groupId, ids);
+        updateContactsTable();
+        updateGroupTable();
+        UI.InfoMessage(strings.fill_done, 2e3, "success");
+    }
+}
+
 async function importContacts() {
     console.log("ImportContacts");
-    let playerNames = document.getElementById('address_players').value;
+    let playerNames = document.getElementById('address_players').value.trim();
 
     if (playerNames === '') {
         UI.InfoMessage(strings.no_contacts, 2e3, "error");
@@ -123,17 +140,17 @@ function updateGroupTable() {
         url: window['game_data']['link_base_pure'] + "mail&mode=address",
         async: false
     }).responseText;
-    if (oldGroup){
+    if (oldGroup) {
         console.log("old group");
         let cg = oldGroup.querySelector("colgroup");
         oldGroup.innerHTML = $.trim($(text).find("#content_value >table >tbody >tr >td:nth-child(2) > table:nth-child(6) tbody").html());
         oldGroup.append(cg);
-    } else{
+    } else {
         console.log("New table");
-        let t =  $.trim($(text).find("#content_value >table >tbody >tr >td:nth-child(2) > table:nth-child(6)").html());
+        let t = $.trim($(text).find("#content_value >table >tbody >tr >td:nth-child(2) > table:nth-child(6)").html());
         let tb = document.createElement("table");
         let cb = document.createElement("colgroup");
-        cb.innerHTML =  $.trim($(text).find("#content_value colgroup").html());
+        cb.innerHTML = $.trim($(text).find("#content_value colgroup").html());
         tb.className = "vis";
         tb.innerHTML = t;
         tb.appendChild(cb);
@@ -151,13 +168,8 @@ function groupExists(groupName) {
     return false;
 }
 
-async function createGroup() {
+async function createGroup(groupName) {
     console.log("CreateGroup");
-    let groupName = document.getElementById('address_name').value;
-    if (groupName === '') {
-        UI.InfoMessage(strings.no_group_name, 2e3, "error");
-        return;
-    }
     if (!groupExists(groupName)) {
         console.log('Creating group: ' + groupName);
         let buttonText = document.querySelector('[name=address_groupname_add_submit]').value;
@@ -192,24 +204,11 @@ function getGroupId() {
         )[0];
 }
 
-async function createAndFillGroup() {
-    await importContacts();
-    let ids = getPlayerIds();
-    await createGroup();
-    let groupId = getGroupId();
-
-    if (ids && groupId) {
-        await fillGroup(groupId, ids);
-        updateContactsTable();
-        updateGroupTable();
-        UI.InfoMessage(strings.fill_done, 2e3, "success");
-    }
-}
 
 async function fillGroup(groupId, playerIds) {
     let body = "";
 
-    for (let i = 0; i<playerIds.length;i++) {
+    for (let i = 0; i < playerIds.length; i++) {
         body += "members%5B" + playerIds[i] + "%5D=on&";
     }
     body += "h=" + csrf;
