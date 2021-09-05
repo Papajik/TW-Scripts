@@ -1,5 +1,5 @@
 # Address book import
-_Read this in other languages:_ [English](rss_en.md), [čeština](rss_cs.md)
+_Read this in other languages:_ [English](addressbook_en.md), [čeština](addressbook_cs.md)
 
 This script is used to import contacts into address book. 
 It can be used to add all given contacts into a group. 
