@@ -16,3 +16,10 @@ javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/rss.js');
 ```
 javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/addressbook.js');
 ```
+
+#### [Hlásič zaplnění skladu](docs/s_alarm_cs.md)
+
+```
+javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/s_alarm.js');
+```
+
