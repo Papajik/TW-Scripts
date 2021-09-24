@@ -1,4 +1,4 @@
-# Import kontaktů
+# Hlásič zaplnění skladu
 
 _Jiné jazykové verze:_ [English](s_alarm_en.md), [čeština](s_alarm_cs.md)
 
