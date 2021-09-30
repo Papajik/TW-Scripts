@@ -80,9 +80,6 @@ async function getVillageData() {
 }
 
 async function startIntervalAlarm() {
-    let village = await getVillageData();
-    parseData(village);
-
     setInterval(async function () {
         countdown--;
         document.querySelector("#check_timer").textContent = String(countdown);
