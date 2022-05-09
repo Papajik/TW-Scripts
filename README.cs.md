@@ -23,3 +23,8 @@ javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/addressboo
 javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/s_alarm.js');
 ```
 
+#### [Hromadné vylepšení vlajek](docs/massFlagUpgrade_cs.md)
+
+```
+javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/massFlagUpgrade.js');
+```

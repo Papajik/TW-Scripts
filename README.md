@@ -22,3 +22,9 @@ javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/addressboo
 ```
 javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/s_alarm.js');
 ```
+
+#### [Mass Flag Upgrade](docs/massFlagUpgrade_en.md)
+
+```
+javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/massFlagUpgrade.js');
+```
