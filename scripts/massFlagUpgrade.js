@@ -117,7 +117,7 @@ function showUpgradeMenu(box) {
     input.type = 'number';
     input.style.width = '50px';
     input.defaultValue = max;
-    input.min = '0';
+    input.min = '3';
     input.onchange = onFlagCountChange;
 
     row.appendChild(upgrade);
@@ -176,14 +176,18 @@ function showUpgradeMenu(box) {
 
 function onFlagCountChange(event) {
     if (!window.upgradeTimerId) {
-        let value = event.target.value;
-        if (value <= event.target.max) {
-            window.lastBox.find("#max_progress")[0].innerText = value;
+        let value = parseInt(event.target.value);
+        if (value <= parseInt(event.target.max)) {
+            if (value < parseInt(event.target.min)) {
+                window.lastBox.find("#max_progress")[0].innerText = event.target.min;
+                event.target.value = event.target.min;
+            } else {
+                window.lastBox.find("#max_progress")[0].innerText = value;
+            }
         } else {
             event.target.value = event.target.max;
             window.lastBox.find("#max_progress")[0].innerText = event.target.max;
         }
-
     }
 
 }
@@ -213,10 +217,15 @@ function switchUpgrade() {
 
 
 function updateProgress() {
-    window.cProgress.innerText = parseInt(window.cProgress.innerText) + 3;
-    dProgress.style.width = parseInt(window.cProgress.innerText) / parseInt(window.mProgress.innerText) * 100 + '%';
-    window.FlagsScreen.upgradeFlags(window.lastBox.data("type"), window.lastBox.data("level"));
-    return parseInt(window.mProgress.innerText) - parseInt(window.cProgress.innerText) < 3;
+    let diff = parseInt(window.mProgress.innerText) - parseInt(window.cProgress.innerText);
+    if (diff >= 3) {
+        window.cProgress.innerText = parseInt(window.cProgress.innerText) + 3;
+        dProgress.style.width = parseInt(window.cProgress.innerText) / parseInt(window.mProgress.innerText) * 100 + '%';
+        window.FlagsScreen.upgradeFlags(window.lastBox.data("type"), window.lastBox.data("level"));
+        return false;
+    }
+    return true;
+
 }
 
 function runUpgrade() {
