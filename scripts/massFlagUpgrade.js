@@ -192,7 +192,7 @@ function switchUpgrade() {
     if (!window.upgradeTimerId) {
         // start mass upgrade
         runUpgrade();
-        window.upgradeTimerId = setInterval(runUpgrade, 2000);
+        window.upgradeTimerId = setInterval(runUpgrade, 100);
         window.lastBox.find('input')[0].disabled = true;
         window.lastBox.find('.btn')[0].innerText = strings.upgrade_btn_stop;
     } else {
