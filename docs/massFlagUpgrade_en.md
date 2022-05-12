@@ -1,4 +1,4 @@
-# Address book import
+# Mass Flag Upgrade
 _Read this in other languages:_ [English](massFlagUpgrade_en.md), [čeština](massFlagUpgrade_cs.md)
 
 This script is used to mass upgrade flags.
@@ -6,7 +6,7 @@ Script is sending upgrade request every 100 ms, therefore it is possible to proc
 Scripts work only on flag overview page.
 
 ```
-javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/addressbook.js');
+javascript: $.getScript('https://papajik.github.io/TW-Scripts/scripts/massFlagUpgrade.js');
 ```
 
 ### Instructions
