@@ -58,7 +58,7 @@ for (let i = 1; i < 9; i++) { // flags
  */
 
 function hideUpgradeMenu() {
-    clearInterval(window.upgradeTimerId);
+    stopInterval();
     window.lastBox?.removeClass('flag_box_red');
     window.lastBox?.find('#upgrade_menu').remove();
     window.lastBox = null;
@@ -201,10 +201,9 @@ function switchUpgrade() {
         window.lastBox.find('.btn')[0].innerText = strings.upgrade_btn_stop;
     } else {
         // Stop mass upgrade
-        clearInterval(window.upgradeTimerId);
+        stopInterval();
 
         let max = window.lastBox.find('span')[0].innerText;
-        window.upgradeTimerId = null;
         window.cProgress.innerText = "0";
         window.mProgress.innerText = max;
         dProgress.style.width = '0%';
@@ -213,6 +212,11 @@ function switchUpgrade() {
         input.disabled = false;
         input.value = max;
     }
+}
+
+function stopInterval() {
+    clearInterval(window.upgradeTimerId);
+    window.upgradeTimerId = null;
 }
 
 
@@ -235,6 +239,6 @@ function runUpgrade() {
     window.dProgress = box.find("#progress_div")[0];
 
     if (updateProgress()) {
-        clearInterval(window.upgradeTimerId);
+        stopInterval();
     }
 }
